@@ -9,9 +9,9 @@ public class Evento {
     private TipoEvento tipoEvento;
     private String codice;
 
-    public Evento(String nome, LocalDate data, TipoEvento tipoEvento ) throws IllegalAccessException {
+    public Evento(String nome, LocalDate data, TipoEvento tipoEvento ) {
         if (nome.isEmpty() || nome == null){
-            throw new IllegalAccessException("Il nome non può essere vuoto");
+            throw new IllegalArgumentException("Il nome non può essere vuoto");
         }
         if (data.isBefore(LocalDate.now())){
             throw new DateTimeException("La data non può trovarsi nel passato");
@@ -57,5 +57,13 @@ public class Evento {
 
     public String getNome() {
         return nome;
+    }
+
+    public LocalDate getData() {
+        return data;
+    }
+
+    public TipoEvento getTipoEvento() {
+        return tipoEvento;
     }
 }
