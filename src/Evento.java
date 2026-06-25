@@ -28,4 +28,34 @@ public class Evento {
         String formattedData = data.format(formato);
         return ("EVT" + formattedData + randomNum);
     }
+
+    public void formattaNome(){
+
+        if(this.nome.length() > 50){
+            this.nome = this.nome.substring(0,50) + "...";
+        }
+
+        //formatto il nome in lower case e uso StringBuilder per evitare di creare una nuova istanza String
+        StringBuilder nomeFormattato = new StringBuilder((this.nome).toLowerCase());
+        //variabile di controllo
+        boolean inizioParola = true;
+
+        //ciclo n volte in base alla quantità di caratteri
+        for(int i = 0;i < nomeFormattato.length(); i++){
+            //Controllo se il carattere è uno spazio vuoto.
+            //Se lo è, setto inizioParola a true.
+            // Il ciclo riparte con i incrementato e, avendo inizioParola=true, entro nell'else if e modifico il carattere corrente.
+            if(Character.isWhitespace(nomeFormattato.charAt(i))){
+                inizioParola = true;
+            } else if (inizioParola) {
+                nomeFormattato.setCharAt(i, Character.toUpperCase(nomeFormattato.charAt(i)));
+                inizioParola = false;
+            }
+        }
+        this.nome = nomeFormattato.toString();
+    }
+
+    public String getNome() {
+        return nome;
+    }
 }
